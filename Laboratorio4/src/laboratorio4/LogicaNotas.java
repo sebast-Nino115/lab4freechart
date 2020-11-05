@@ -21,7 +21,7 @@ public class LogicaNotas {
             while (scanner.hasNextLine()) {
                 List<String> record=getRecordFromLine(scanner.nextLine()); //
                 Estructura dato=new Estructura();
-                // extraido los datos de mi tabla en una lista 
+                // extraer los datos de mi tabla en una lista 
                 dato.Nombre=record.get(0);
                 for (int i = 0; i < record.size(); i++) {
                     dato.Nota.add(record.get(i));

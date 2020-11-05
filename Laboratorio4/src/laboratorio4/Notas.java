@@ -306,7 +306,9 @@ public class Notas extends javax.swing.JFrame {
     }//GEN-LAST:event_NombreActionPerformed
 
     private void CrearT_NotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearT_NotasActionPerformed
-        md=new DefaultTableModel();
+       if(!Nestudiantes.getText().equals("")&&!Nnotas.getText().equals("")){
+           
+       md=new DefaultTableModel();
        md.addColumn("Nombres");
        int columnas=Integer.parseInt(Nnotas.getText());
        for(int i=0;i<columnas;i++)
@@ -322,12 +324,17 @@ public class Notas extends javax.swing.JFrame {
        TablaNotas.setModel(md);
        Nestudiantes.setText("");
        Nnotas.setText("");
+       }
+       else {
+           JOptionPane.showMessageDialog(null, "Ingrese el numero de estudiantes y de notas");
+       }
     }//GEN-LAST:event_CrearT_NotasActionPerformed
 
     private void CDefinitivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CDefinitivasActionPerformed
         double  Aprobo=0.0,Reprobo=0.0;
         totalA=0;totalR=0;
-        double suma=0.0, NumeroN=TablaNotas.getColumnCount()-1;
+        double suma=0.0; 
+        double NumeroN=TablaNotas.getColumnCount()-1;
         String resultado="",n="";
         double[] promedio=new double[TablaNotas.getRowCount()];
         
@@ -360,7 +367,8 @@ public class Notas extends javax.swing.JFrame {
             String t=TablaNotas.getValueAt(i,0).toString();
             String tf= Nombre.getText();
             if (t.equals(tf)) {
-              j=i; esta=true;
+              j=i; 
+              esta=true;
             }
         }
         if (esta) {
@@ -370,13 +378,7 @@ public class Notas extends javax.swing.JFrame {
             s="nota "+Integer.toString(i);
             dts.addValue(Double.parseDouble(TablaNotas.getValueAt(j,i).toString()),"NOTAS",s);
         }
-        JFreeChart ch= ChartFactory.createLineChart(TablaNotas.getValueAt(j,0).toString(),
-                "N° NOTA",
-                "NOTA", 
-                dts,PlotOrientation.VERTICAL,
-                true,
-                true,
-                false);
+        JFreeChart ch= ChartFactory.createLineChart(TablaNotas.getValueAt(j,0).toString(),"N° NOTA","NOTA",dts,PlotOrientation.VERTICAL,true,true,false);
         ChartPanel panel=new ChartPanel(ch);
         JFrame ventana= new JFrame("");
         ventana.setVisible(true);
@@ -418,7 +420,9 @@ public class Notas extends javax.swing.JFrame {
         if (NombreA != null) {
             Exportar(lista,";",NombreA.getText()+".csv");
         }
-        else {Exportar(lista,";","TablaNotas.csv");}
+        else {
+            Exportar(lista,";","TablaNotas.csv");
+        }
         NombreA.setText("");
     }//GEN-LAST:event_ExportarActionPerformed
 
