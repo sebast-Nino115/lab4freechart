@@ -364,19 +364,19 @@ public class Notas extends javax.swing.JFrame {
         int j=0;
         boolean esta=false;
         for (int i = 0; i < TablaNotas.getRowCount(); i++) {
-            String t=TablaNotas.getValueAt(i,0).toString();
-            String tf= Nombre.getText();
-            if (t.equals(tf)) {
+            String tabla=TablaNotas.getValueAt(i,0).toString();
+            String nombre= Nombre.getText();
+            if (tabla.equals(nombre)) {
               j=i; 
               esta=true;
             }
         }
         if (esta) {
         DefaultCategoryDataset dts=new DefaultCategoryDataset();
-        String s="";
+        String info="";
         for (int i = 1; i < TablaNotas.getColumnCount(); i++) {
-            s="nota "+Integer.toString(i);
-            dts.addValue(Double.parseDouble(TablaNotas.getValueAt(j,i).toString()),"NOTAS",s);
+            info="nota "+Integer.toString(i);
+            dts.addValue(Double.parseDouble(TablaNotas.getValueAt(j,i).toString()),"NOTAS",info);
         }
         JFreeChart ch= ChartFactory.createLineChart(TablaNotas.getValueAt(j,0).toString(),"N° NOTA","NOTA",dts,PlotOrientation.VERTICAL,true,true,false);
         ChartPanel panel=new ChartPanel(ch);
@@ -396,8 +396,8 @@ public class Notas extends javax.swing.JFrame {
         DefaultPieDataset dts=new DefaultPieDataset();
         dts.setValue("Aprobados",totalA);
         dts.setValue("Reprobados",totalR);
-        JFreeChart ch= ChartFactory.createPieChart("Estadistica",dts,true,true,false);
-        ChartPanel panel=new ChartPanel(ch);
+        JFreeChart mostrar= ChartFactory.createPieChart("Estadistica",dts,true,true,false);
+        ChartPanel panel=new ChartPanel(mostrar);
         JFrame ventana= new JFrame("");
         ventana.setVisible(true);
         ventana.setSize(800, 600);
